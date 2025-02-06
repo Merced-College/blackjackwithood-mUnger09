@@ -1,3 +1,5 @@
+//Dylan Gongora, Matias Unger-Ramirez, Kirat Kaur
+
 package cardGame;
 
 import java.io.File;
@@ -12,7 +14,6 @@ public class CardGame {
 
 
 	public static void main(String[] args) {
-
 		Scanner input = null;
 		try {
 			input = new Scanner(new File("cards.txt"));
@@ -24,7 +25,7 @@ public class CardGame {
 
 		while(input.hasNext()) {
 			String[] fields  = input.nextLine().split(",");
-			//	public Card(String cardSuit, String cardName, int cardValue, String cardPicture) {
+			//public Card(String cardSuit, String cardName, int cardValue, String cardPicture) {
 			Card newCard = new Card(fields[0], fields[1].trim(),
 					Integer.parseInt(fields[2].trim()), fields[3]);
 			deckOfCards.add(newCard);	
@@ -48,8 +49,54 @@ public class CardGame {
 
 	}//end main
 
-	public static void shuffle() {
+	//OUR CLASS
+	public class Card {
+		private String suit;
+		private String name;
+		private int value;
+		private String picture;
 
+		public static Card(String cardSuit, String cardName, int cardValue, String cardPicture) {
+			this.suit = cardSuit;
+			this.name = cardName;
+			this.value = cardValue;
+			this.picture = cardPicture;
+		}
+
+		public void setSuit(String cardSuit) {
+			this.suit = cardSuit;
+		}
+
+		public void setName(String cardName) {
+			this.name = cardName;
+		}
+
+		public void setValue(String cardValue) {
+			this.value = cardValue;
+		}
+
+		public void setPicture(String cardPicture) {
+			this.picture = cardPicture;
+		}
+
+		public String getSuit() {
+			return this.suit;
+		}
+
+		public String getName() {
+			return this.name;
+		}
+
+		public int getValue() {
+			return this.value;
+		}
+
+		public String getPicture() {
+			return this.picture;
+		}
+	}
+
+	public static void shuffle() {
 		//shuffling the cards by deleting and reinserting
 		for (int i = 0; i < deckOfCards.size(); i++) {
 			int index = (int) (Math.random()*deckOfCards.size());
@@ -61,7 +108,6 @@ public class CardGame {
 
 	//check for 2 of a kind in the players hand
 	public static boolean checkFor2Kind() {
-
 		int count = 0;
 		for(int i = 0; i < playerCards.size() - 1; i++) {
 			Card current = playerCards.get(i);
@@ -79,5 +125,6 @@ public class CardGame {
 
 		}//end outer for
 		return false;
+
 	}
 }//end class
